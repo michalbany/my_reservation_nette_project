@@ -1,0 +1,15 @@
+{block content}
+<div class="jumbotron">    
+<h1>Potvrdit Rezervaci</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{$room->name}</h5>
+        <p class="card-text">Datum příjezdu: {$arrivalDate} <br>
+                            Datum odjezdu: {$departureDate}</p>
+    </div>
+</div>
+{control reservationForm}
+{/block}
+
+{block roomList}
+{/block}

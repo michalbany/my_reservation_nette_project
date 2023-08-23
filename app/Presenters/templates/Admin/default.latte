@@ -1,0 +1,68 @@
+{block content}
+<div class="jumbotron">    
+    <h1>Admin Menu</h1>
+    <hr class="my-4">
+    <p>Vytvořit nový pokoj</p>
+
+    {control addRoomForm}
+</div>
+{/block}
+
+
+{block roomList}
+<div class="container-fluid">
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Pokoje</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pokoj</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $rooms as $room}
+                    <tr>
+                        <td>{$room->name}</td>
+                        <td class="col-md-2">
+                            <a href="{link deleteRoom, $room->id}" class="btn btn-danger">Smazat</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Rezervace</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Název pokoje</th>
+                        <th>Od</th>
+                        <th>Do</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $reservations as $reservation}
+                    <tr>
+                        <td>{$rooms[$reservation->room_id]->name}</td>
+                        <td>{$reservation->arrival_date->format('d. m. Y')}</td>
+                        <td>{$reservation->departure_date->format('d. m. Y')}</td>
+                        <td class="col-md-2">
+                            <a href="{link deleteReservation, $reservation->id}" class="btn btn-danger">Smazat</a>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{/block}

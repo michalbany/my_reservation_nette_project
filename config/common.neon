@@ -1,0 +1,36 @@
+parameters:
+    database:
+        dsn: 'mysql:host=localhost;dbname=my_reservation_project;charset=utf8'
+        user: 'root'
+        password: 'JlmI6bRV'
+
+application:
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
+
+session:
+    expiration: 14 days
+
+di:
+    export:
+        parameters: no
+        tags: no
+
+search:
+    -
+        in: %appDir%
+        classes:
+            - *Factory
+            - *Facade
+
+services:
+    - App\Router\RouterFactory::createRouter
+    connection:
+        class: Nette\Database\Connection(%database.dsn%, %database.user%, %database.password%)
+    database.structure:
+        factory: Nette\Database\Structure( @connection )
+    database.conventions:
+        factory: Nette\Database\Conventions\DiscoveredConventions( @database.structure )
+    database.context:
+        factory: Nette\Database\Explorer( @connection, @database.structure, @database.conventions )

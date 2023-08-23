@@ -1,0 +1,38 @@
+{block content}
+<div class="jumbotron">
+    <h1 class="display-4">Vítejte na stránce pro rezervaci pokojů!</h1>
+    <p class="lead">Rezervujte svůj pokoj snadno a rychle.</p>
+    <hr class="my-4">
+    <p>Vyplňte formulář níže a pokračujte v rezervaci.</p>
+    {control reservationForm}
+</div>
+
+{/block}
+
+{block roomList}
+<div class="room-list mt-4">
+    {if isset($rooms)}
+        <h2>Dostupné pokoje</h2>
+        {if $rooms}
+            <div class="row">
+            {foreach $rooms as $room}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{$room->name}</h5>
+                            <p class="card-text">
+                                Číslo pokoje: {$room->room_number} <br>
+                                Typ: {$room->type}
+                            </p>
+							<button class="btn btn-primary btn-block book-room-btn" data-room-id="{$room->id}">Rezervovat</button>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+            </div>
+        {else}
+            <p>Bohužel v zadaném období nejsou žádné dostupné pokoje.</p>
+        {/if}
+    {/if}
+</div>
+{/block}
